@@ -26,6 +26,71 @@ import heart from "../../assets/heart.svg";
 import wave from "../../assets/waves.svg";
 import pause from "../../assets/pause.png";
 import playy from "../../assets/playy.png";
+import { SongToPlayer } from "../../recoil/atom";
+
+import { useRecoilState, useRecoilValue } from "recoil";
+
+import holdMeCLose from "../audio/mylist/songs/Hold Me Close.mp3";
+import chanKithan from "../audio/mylist/songs/Chan Kithan  Ali Sethi (Official Music Video).mp3";
+import chaleHiJanaTha from "../audio/mylist/songs/Baahon Men Chale Aao 4K - Lata Mangeshkar Romantic Song - Sanjeev Kumar, Jaya Bachchan - Anamika.mp3";
+import gonegonegone from "../audio/mylist/songs/Phillip Phillips - Gone, Gone, Gone.mp3";
+import lavienORse from "../audio/mylist/songs/Emily Watts - La Vie En Rose (Lyrics)  Hold me close and hold me fast.mp3";
+import heather from "../audio/mylist/songs/Conan Gray - Heather.mp3";
+
+import holdme from "../audio/mylist/songs/img/holdmeclose.jpg";
+import chan from "../audio/mylist/songs/img/chan kitthan.jpg";
+import bahon from "../audio/mylist/songs/img/bahon mein chali aa.jpg";
+import lavien from "../audio/mylist/songs/img/la-vien.jpg";
+import ggg from "../audio/mylist/songs/img/gonegone.jpg";
+import heatherImg from "../audio/mylist/songs/img/Heatherposter.jpg";
+
+const songs = [
+  {
+    title: "Hold Me Close",
+    artist: "Madds Buckley",
+    artwork: holdme,
+    url: holdMeCLose,
+    id: "1",
+  },
+  {
+    title: "Chan Kithan",
+    artist: "Ali sethi",
+    artwork: chan,
+    url: chanKithan,
+    id: "2",
+  },
+  {
+    title: "Baahon Men Chale Aao",
+    artist: "Lata Mangeshkar",
+    artwork: bahon,
+    url: chaleHiJanaTha,
+    id: "3",
+  },
+  {
+    title: "Gone Gone Gone",
+    artist: "Phillip Phillips",
+    artwork: ggg,
+    url: gonegonegone,
+    id: "4",
+  },
+  {
+    title: "La Vie En Rose",
+    artist: "Emily Watts",
+    artwork: lavien,
+    url: lavienORse,
+    id: "5",
+  },
+  {
+    title: "Heather",
+    artist: "Conan Gray",
+    artwork: heather,
+    url: lavienORse,
+    id: "6",
+  },
+];
+
+const trendingSongs = [...songs.slice(3, 5)];
+const Recently = [...songs.slice(0, 3)];
 
 const PopularArtists = [
   {
@@ -81,12 +146,12 @@ const TrendySongs = [
   },
 ];
 
-import { audio } from "../audio/audioEnglish";
-
-// console.log(audio);
+import { audio1 } from "../audio/audio2";
 
 const Popular = () => {
   const [video, setPlay] = useState<boolean>(false);
+  const [, setPlayThis] = useRecoilState(SongToPlayer);
+  const songId = useRecoilValue(SongToPlayer);
 
   return (
     <>
@@ -100,6 +165,7 @@ const Popular = () => {
                 border: "none",
                 background: "none",
                 paddingRight: "60px",
+                fontFamily: "Poppins, sans-serif",
               }}
             >
               View all
@@ -131,6 +197,7 @@ const Popular = () => {
                 border: "none",
                 background: "none",
                 paddingRight: "60px",
+                fontFamily: "Poppins, sans-serif",
               }}
             >
               View all
@@ -141,23 +208,32 @@ const Popular = () => {
               width: "96%",
               display: "flex",
               justifyContent: "start",
+              // border: "1px solid white",
               gap: "2em",
+              height: "35vh",
             }}
           >
-            {audio.splice(1, 3).map((artist) => (
+            {Recently.map((artist) => (
               <MusicCard key={artist.id}>
-                <img
-                  src={artist.artwork}
-                  alt=""
+                <div
                   style={{
-                    height: "286px",
-                    borderRadius: "35px",
-                    border: "1px solid white",
+                    height: "30vh",
+                    // border: "1px solid white",
                   }}
-                  onClick={() => {
-                    console.log(artist.artwork);
-                  }}
-                />
+                >
+                  <img
+                    src={artist.artwork}
+                    alt=""
+                    style={{
+                      height: "286px",
+                      borderRadius: "35px",
+                      // border: "1px solid white",
+                    }}
+                    onClick={() => {
+                      setPlayThis({ id: artist.id });
+                    }}
+                  />
+                </div>
                 <div
                   style={{
                     display: "flex",
@@ -169,12 +245,14 @@ const Popular = () => {
                   <Typography
                     sx={{
                       fontSize: "20pxm",
+                      fontFamily: "Poppins, sans-serif",
                     }}
                   >
                     {artist.title}
                     <Typography
                       sx={{
                         fontSize: "12pxm",
+                        fontFamily: "Poppins, sans-serif",
                       }}
                     >
                       {artist.artist}
@@ -280,141 +358,82 @@ const Popular = () => {
                 paddingLeft: "2em",
               }}
             >
-              <TrendingCard>
-                <img
-                  src={img2}
-                  alt=""
-                  style={{
-                    width: "130px",
-                    height: "120px",
-                    top: "-20px",
-                    left: "-30px",
-                    borderRadius: "50%",
-                    position: "absolute",
-                  }}
-                />
-                <Typography
-                  sx={{
-                    fontSize: "20pxm",
-                    fontWeight: "bold",
-                    marginLeft: "8em",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  The Book of you
-                  <Typography
-                    sx={{
-                      fontSize: "12px",
-                      fontWeight: "bold",
-                      display: "flex",
-                      width: "100%",
-                      justifyContent: "start",
-                      // alignItems: "center",
-                    }}
-                  >
-                    Alec benjamin
-                  </Typography>
-                </Typography>
-                <img src={wave} alt="" />
-                <div
-                  onClick={() => {
-                    setPlay(!video);
-                  }}
-                  style={{
-                    borderRadius: "50px",
-                    height: "35px",
-                    width: "35px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    // backgroundColor: "rgba(229, 252, 150, 0.",
-                    backgroundColor: "rgb(184,81,22)",
-                    background:
-                      "linear-gradient(180deg, rgba(184,81,22,1) 4%, rgba(121,9,104,1) 48%, rgba(175,21,241,1) 100%)",
-                  }}
-                >
-                  <img
-                    src={video ? pause : playy}
-                    alt="img"
-                    style={{
-                      height: "12px",
-                      width: "12px",
-                      // padding: "0.5em",
-                    }}
-                  />
-                </div>
-              </TrendingCard>
-
-              <TrendingCard>
-                <img
-                  src={img1}
-                  alt=""
-                  style={{
-                    width: "130px",
-                    height: "120px",
-                    top: "-20px",
-                    left: "-30px",
-                    borderRadius: "50%",
-                    position: "absolute",
-                  }}
-                />
-                <Typography
-                  sx={{
-                    fontSize: "20pxm",
-                    fontWeight: "bold",
-                    marginLeft: "8em",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  Night Changes
-                  <Typography
-                    sx={{
-                      fontSize: "12px",
-                      fontWeight: "bold",
-                      display: "flex",
-                      width: "100%",
-                      justifyContent: "start",
-                      // alignItems: "center",
-                    }}
-                  >
-                    One Direction
-                  </Typography>
-                </Typography>
-                <img src={wave} alt="" />
-                <div
-                  onClick={() => {
-                    setPlay(!video);
-                  }}
-                  style={{
-                    borderRadius: "50px",
-                    height: "35px",
-                    width: "35px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    // backgroundColor: "rgba(229, 252, 150, 0.",
-                    backgroundColor: "rgb(184,81,22)",
-                    background:
-                      "linear-gradient(180deg, rgba(184,81,22,1) 4%, rgba(121,9,104,1) 48%, rgba(175,21,241,1) 100%)",
-                  }}
-                >
-                  <img
-                    src={video ? pause : playy}
-                    alt="img"
-                    style={{
-                      height: "12px",
-                      width: "12px",
-                      // padding: "0.5em",
-                    }}
-                  />
-                </div>
-              </TrendingCard>
+              {trendingSongs.map((audio) => {
+                return (
+                  <TrendingCard key={audio.id}>
+                    <img
+                      src={audio.artwork}
+                      alt=""
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        top: "-20px",
+                        left: "-30px",
+                        borderRadius: "50%",
+                        position: "absolute",
+                      }}
+                      onClick={() => {
+                        setPlayThis({ id: audio.id });
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        fontSize: "20pxm",
+                        fontWeight: "bold",
+                        marginLeft: "6em",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontFamily: "Poppins, sans-serif",
+                      }}
+                    >
+                      {audio.title}
+                      <Typography
+                        sx={{
+                          fontSize: "12px",
+                          fontWeight: "bold",
+                          display: "flex",
+                          width: "100%",
+                          justifyContent: "start",
+                          fontFamily: "Poppins, sans-serif",
+                        }}
+                      >
+                        {audio.artist}
+                      </Typography>
+                    </Typography>
+                    <img src={wave} alt="" />
+                    <div
+                      onClick={(e) => {
+                        setPlay(!video);
+                        setPlayThis({ id: audio.id });
+                        e.preventDefault();
+                      }}
+                      style={{
+                        borderRadius: "50px",
+                        height: "35px",
+                        width: "35px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // backgroundColor: "rgba(229, 252, 150, 0.",
+                        backgroundColor: "rgb(184,81,22)",
+                        background:
+                          "linear-gradient(180deg, rgba(184,81,22,1) 4%, rgba(121,9,104,1) 48%, rgba(175,21,241,1) 100%)",
+                      }}
+                    >
+                      <img
+                        src={video ? pause : playy}
+                        alt="img"
+                        style={{
+                          height: "12px",
+                          width: "12px",
+                        }}
+                      />
+                    </div>
+                  </TrendingCard>
+                );
+              })}
             </TrendingCardContainer>
           </div>
         </Grid>

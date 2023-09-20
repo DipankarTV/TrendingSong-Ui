@@ -19,18 +19,7 @@ const Home = () => {
           <NavBar />
           <Popular />
         </Grid>
-        <Grid
-          sx={
-            {
-              // border: "1px solid white",
-              // borderRadius: "10px",
-              // padding: "10px",
-              // margin: "10px",
-            }
-          }
-          item
-          xs={3.2}
-        >
+        <Grid item xs={3.2}>
           <FriendsActivity />
         </Grid>
       </Grid>

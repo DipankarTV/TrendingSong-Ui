@@ -16,6 +16,7 @@ const SideBar = () => {
             justifyContent: "space-between",
             alignItems: "center",
             // border: "2px solid red",
+            fontFamily: "Poppins, sans-serif",
             height: "86%",
           }}
         >

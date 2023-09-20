@@ -54,20 +54,19 @@ export const MainPlayer = styled("div")({
 
 export const ProgressBar = styled("div")({
   width: "90%",
-  backgroundColor: "#e0e0e0",
-  height: "10px",
-  borderRadius: "5px",
+  backgroundColor: "grey",
+  height: "5px",
+  borderRadius: "10px",
   marginTop: "10px",
-  border: "1px solid white",
   display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  // justifyContent: "space-between",
+  gap: 2,
+  flexDirection: "column",
+  justifyContent: "space-between",
 });
 
 export const Progress = styled("div")({
   height: "100%",
-  borderRadius: "5px",
-  backgroundColor: "rgba(255, 0, 0, 0.7)",
-  border: "1px solid white",
+  width: "100%",
+  borderRadius: "10px",
+  backgroundColor: "rgba(255, 255, 255, 0.7)",
 });

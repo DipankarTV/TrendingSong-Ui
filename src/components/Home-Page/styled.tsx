@@ -3,6 +3,7 @@ import { styled, Typography } from "@mui/material";
 export const PopularText = styled(Typography)({
   fontSize: "22px",
   fontWeight: "bold",
+  fontFamily: "Poppins, sans-serif",
 });
 
 export const ArtistContainer = styled("div")({
@@ -21,16 +22,17 @@ export const ArtistContainerCircle = styled("div")({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  width: "101px",
-  height: "101px",
+  width: "105px",
+  height: "105px",
   gap: "3.5px",
   // padding: "5px",
   // border: "1px solid red",
 });
 
 export const TextField = styled("span")({
-  fontSize: "11px",
+  fontSize: "12px",
   fontWeight: "bolder",
+  fontFamily: "Poppins, sans-serif",
 });
 
 export const MusicCard = styled("div")({
@@ -82,7 +84,7 @@ export const TrendingCardContainer = styled("div")({
 export const TrendingCard = styled("div")({
   width: "100%",
   height: "30%",
-  border: "1px solid white",
+  // border: "1px solid white",
   borderRadius: "50px",
   backgroundColor: "#111111",
   position: "relative",
